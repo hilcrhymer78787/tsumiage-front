@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "short_name": "",
-  "description": "",
+  "name": "Tsumiage",
+  "short_name": "Tsumiage",
+  "description": "タスク管理アプリ",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
