@@ -1,22 +1,6 @@
-git clone https://github.com/hilcrhymer78787/tsumiage.git
+git clone https://github.com/hilcrhymer78787/tsumiage-front.git
 
-cd tsumiage
-
-docker-compose up -d --build
-
-docker-compose exec app bash
-
-cp .env.example .env
-
-composer install
-
-php artisan key:generate
-
-php artisan migrate:refresh --seed
-
-もう一つターミナルを開く
-
-cd next
+cd tsumiage-front
 
 cp .env.example .env
 
