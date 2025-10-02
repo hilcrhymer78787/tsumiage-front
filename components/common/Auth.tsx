@@ -50,7 +50,7 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
               label="password"
             />
             <ErrTxt txt={message} p={0} />
-            {process.env.NEXT_PUBLIC_IS_SHOW_TEST_USER == "1" && (
+            {process.env.NEXT_PUBLIC_APP_ENV !== "production" && (
               <RStack justifyContent="flex-end">
                 <LoadingButton
                   color="inherit"
