@@ -6,6 +6,9 @@ import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { Success } from "@/data/types/success";
 import { CmnErr } from "@/data/types/cmnErr";
 import { CmnRes } from "@/data/types/cmnRes";
+import dayjs from "dayjs";
+import { Calendar } from "@/data/types/calendar";
+
 type ApiReq = {
   user_id: number;
   year: number;
@@ -15,14 +18,20 @@ type ApiRes = CmnRes<{
   calendars: Calendar[];
 }>;
 type ApiErr = CmnErr;
-import dayjs from "dayjs";
-import { Calendar } from "@/data/types/calendar";
 
-export const calendarsAtom = atom<Calendar[] | null>({
-  key: "calendar",
-  dangerouslyAllowMutability: true,
-  default: null,
-});
+// HMR 対応: すでに atom があれば再定義しない
+export const calendarsAtom =
+  (global as any).calendarsAtom ??
+  atom<Calendar[] | null>({
+    key: "calendar",
+    dangerouslyAllowMutability: true,
+    default: null,
+  });
+
+// HMR 用に global に保持
+if (process.env.NODE_ENV === "development") {
+  (global as any).calendarsAtom = calendarsAtom;
+}
 
 export const useReadWorkMonth = () => {
   const { errHandler } = useErrHandler();
