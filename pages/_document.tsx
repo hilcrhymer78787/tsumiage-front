@@ -5,19 +5,18 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
-          {/* windows */}
+          {/* Windows */}
           <meta name="msapplication-square70x70logo" content="/site-tile-70x70.png" />
           <meta name="msapplication-square150x150logo" content="/site-tile-150x150.png" />
           <meta name="msapplication-wide310x150logo" content="/site-tile-310x150.png" />
           <meta name="msapplication-square310x310logo" content="/site-tile-310x310.png" />
           <meta name="msapplication-TileColor" content="#000" />
-          {/* safari */}
+          {/* Safari */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="#222222" />
           <meta name="apple-mobile-web-app-title" content="tsumiage" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
-          {/* Add to splash screen for Safari on iOS */}
+          {/* Splash screens */}
           <link
             href="splashscreens/iphone5_splash.png"
             media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
@@ -68,7 +67,7 @@ class MyDocument extends Document {
             media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
             rel="apple-touch-startup-image"
           />
-          {/* 一般 */}
+          {/* General */}
           <meta name="application-name" content="tsumiage" />
           <meta name="theme-color" content="#000" />
           <meta name="description" content="this is tsumiage" />

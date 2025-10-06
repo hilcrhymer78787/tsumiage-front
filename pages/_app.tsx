@@ -3,6 +3,7 @@ import "@/styles/globals.scss";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import { useBearerAuth } from "@/data/user/useBearerAuth";
+import Head from "next/head";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { AppProps } from "next/app";
@@ -28,7 +29,6 @@ const AppInit = ({ setIsAuth }: { setIsAuth: Dispatch<SetStateAction<boolean | n
       setTimeout(() => setIsAuth(!res));
     };
     mountedFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const AppInit = ({ setIsAuth }: { setIsAuth: Dispatch<SetStateAction<boolean | n
       month: Number(dayjs().format("M")),
     });
     setIsFirst(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginInfo]);
   return <></>;
 };
@@ -49,6 +48,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
   return (
     <RecoilRoot>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+      </Head>
       <ThemeProvider theme={theme}>
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ja}>
           <CssBaseline />
