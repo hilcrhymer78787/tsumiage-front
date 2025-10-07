@@ -58,8 +58,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <CssBaseline />
           <MySnackbar />
           <AppInit setIsAuth={setIsAuth} />
-          test123
-          {dayjs().format()}
           {isAuth !== null && <Component {...pageProps} />}
         </LocalizationProvider>
       </ThemeProvider>
