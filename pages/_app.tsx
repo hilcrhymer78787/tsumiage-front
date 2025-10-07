@@ -29,6 +29,7 @@ const AppInit = ({ setIsAuth }: { setIsAuth: Dispatch<SetStateAction<boolean | n
       setTimeout(() => setIsAuth(!res));
     };
     mountedFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const AppInit = ({ setIsAuth }: { setIsAuth: Dispatch<SetStateAction<boolean | n
       month: Number(dayjs().format("M")),
     });
     setIsFirst(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginInfo]);
   return <></>;
 };
@@ -56,6 +58,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <CssBaseline />
           <MySnackbar />
           <AppInit setIsAuth={setIsAuth} />
+          {dayjs().format()}
           {isAuth !== null && <Component {...pageProps} />}
         </LocalizationProvider>
       </ThemeProvider>
