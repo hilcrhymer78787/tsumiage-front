@@ -56,7 +56,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
-        source: "out/"
+        source: "out/*"
         target: ${{ secrets.APP_DIR }}
 
     # 8. EC2 上のファイル権限を Apache 用に設定
