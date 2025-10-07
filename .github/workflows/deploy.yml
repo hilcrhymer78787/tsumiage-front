@@ -12,27 +12,27 @@ jobs:
 
     steps:
     # 1. リポジトリをチェックアウト
-    - name: Checkout code
+    - name: リポジトリをチェックアウト
       uses: actions/checkout@v3
 
     # 2. Node.js をセットアップ
-    - name: Setup Node.js
+    - name: Node.js をセットアップ
       uses: actions/setup-node@v3
       with:
         node-version: '22.20.0'
 
     # 3. 依存パッケージをインストール
-    - name: Install dependencies
+    - name: 依存パッケージをインストール
       run: npm ci
 
     # 4. Next.js をビルドして静的サイトを生成
-    - name: Build and export Next.js
+    - name: Next.js をビルドして静的サイトを生成
       run: |
         npm run build
         npm run export
 
     # 5. EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
-    - name: Sync static site to EC2
+    - name: EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
       uses: appleboy/scp-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -43,7 +43,7 @@ jobs:
         flags: "-avz --delete"
 
     # 6. EC2 上のファイル権限を Apache 用に設定
-    - name: Set permissions
+    - name: EC2 上のファイル権限を Apache 用に設定
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
