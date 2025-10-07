@@ -14,7 +14,7 @@ jobs:
     - name: リポジトリをチェックアウト
       uses: actions/checkout@v3
 
-    # 2. Node.js をセットアップ
+    # 2. Node.js をセットアップ 
     - name: Node.js をセットアップ
       uses: actions/setup-node@v3
       with:
