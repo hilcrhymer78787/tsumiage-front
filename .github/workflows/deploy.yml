@@ -29,8 +29,18 @@ jobs:
     - name: Next.js をビルドして静的サイトを生成
       run: yarn build
 
-    # 5. EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
-    - name: EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
+    # 5. EC2 上の古いファイルを削除
+    - name: EC2 上の古いファイルを削除
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          sudo rm -rf ${{ secrets.APP_DIR }}/*
+
+    # 6. EC2 にファイルをコピー
+    - name: EC2 にファイルをコピー
       uses: appleboy/scp-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -38,9 +48,8 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         source: "out/"
         target: ${{ secrets.APP_DIR }}
-        flags: "-avz --delete"
 
-    # 6. EC2 上のファイル権限を Apache 用に設定
+    # 7. EC2 上のファイル権限を Apache 用に設定
     - name: EC2 上のファイル権限を Apache 用に設定
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -48,5 +57,5 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          sudo chown -R www-data:www-data ${{ secrets.APP_DIR }}
+          sudo chown -R apache:apache ${{ secrets.APP_DIR }}
           sudo chmod -R 755 ${{ secrets.APP_DIR }}
