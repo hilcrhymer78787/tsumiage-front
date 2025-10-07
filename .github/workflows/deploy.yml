@@ -1,4 +1,4 @@
-name: Deploy Next.js Static to EC2
+name: deploy to EC2
 
 on:
   push:
@@ -10,52 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. リポジトリをチェックアウト
-    - name: リポジトリをチェックアウト
-      uses: actions/checkout@v3
+      # リポジトリをチェックアウト
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v3
 
-    # 2. Node.js をセットアップ 
-    - name: Node.js をセットアップ
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22.20.0'
+      # Node.js をセットアップ
+      - name: Node.js をセットアップ
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.20.0"
 
-    # 3. 依存パッケージをインストール
-    - name: 依存パッケージをインストール
-      run: yarn install --frozen-lockfile
+      # 依存パッケージをインストール
+      - name: 依存パッケージをインストール
+        run: yarn install --frozen-lockfile
 
-    # 4. Next.js をビルドして静的サイトを生成
-    - name: Next.js をビルドして静的サイトを生成
-      run: yarn build
+      # Next.js をビルドして静的サイトを生成
+      - name: Next.js をビルドして静的サイトを生成
+        run: yarn build
 
-    # 5. EC2 ディレクトリ権限を ec2-user に変更（必要なら）
-    - name: EC2 ディレクトリ権限を ec2-user に変更
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          sudo mkdir -p ${{ secrets.APP_DIR }}
-          sudo chown -R ec2-user:ec2-user ${{ secrets.APP_DIR }}
+      # 秘密鍵を作成
+      - name: 秘密鍵を作成
+        run: echo "${{ secrets.EC2_SSH_KEY }}" > key && chmod 600 key
 
-    # 6. rsync で EC2 にデプロイ
-    - name: rsync で EC2 にデプロイ
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          rsync -avz --delete ./out/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.APP_DIR }}
-
-    # 7. EC2 上のファイル権限を Apache 用に設定
-    - name: EC2 上のファイル権限を Apache 用に設定
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          sudo chown -R apache:apache ${{ secrets.APP_DIR }}
-          sudo chmod -R 755 ${{ secrets.APP_DIR }}
+      # rsync でデプロイ
+      - name: rsync でデプロイ
+        run: |
+          rsync -auzrv -e "ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22" \
+          --delete ./out/* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ secrets.APP_DIR }}/
