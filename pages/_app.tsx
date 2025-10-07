@@ -58,7 +58,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <CssBaseline />
           <MySnackbar />
           <AppInit setIsAuth={setIsAuth} />
-          test
           {isAuth !== null && <Component {...pageProps} />}
         </LocalizationProvider>
       </ThemeProvider>
