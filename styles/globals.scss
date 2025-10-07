@@ -13,11 +13,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.flexEnd {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 .ellipsis {
   white-space: nowrap; /* テキストを折り返さないようにする */
   overflow: hidden; /* コンテナーからはみ出た部分を隠す */
