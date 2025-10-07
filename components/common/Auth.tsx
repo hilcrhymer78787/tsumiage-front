@@ -50,20 +50,20 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
               label="password"
             />
             <ErrTxt txt={message} p={0} />
-            {process.env.NEXT_PUBLIC_APP_ENV !== "production" && (
-              <RStack justifyContent="flex-end">
-                <LoadingButton
-                  color="inherit"
-                  variant="contained"
-                  onClick={testAuth}
-                  loading={testAuthLoading}
-                  disabled={basicAuthLoading}
-                >
-                  テストユーザーでログイン
-                  <SendIcon />
-                </LoadingButton>
-              </RStack>
-            )}
+            {/* {process.env.NEXT_PUBLIC_APP_ENV !== "production" && ( */}
+            <RStack justifyContent="flex-end">
+              <LoadingButton
+                color="inherit"
+                variant="contained"
+                onClick={testAuth}
+                loading={testAuthLoading}
+                disabled={basicAuthLoading}
+              >
+                テストユーザーでログイン
+                <SendIcon />
+              </LoadingButton>
+            </RStack>
+            {/* )} */}
           </Stack>
           <CardActions>
             <Button onClick={() => setIsNew(true)} color="inherit" variant="contained">
