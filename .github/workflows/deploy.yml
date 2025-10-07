@@ -33,7 +33,7 @@ jobs:
 
     # 5. EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
     - name: Sync static site to EC2
-      uses: appleboy/scp-action@v0.1.10
+      uses: appleboy/scp-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
@@ -44,7 +44,7 @@ jobs:
 
     # 6. EC2 上のファイル権限を Apache 用に設定
     - name: Set permissions
-      uses: appleboy/ssh-action@v0.1.10
+      uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
