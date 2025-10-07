@@ -21,15 +21,13 @@ jobs:
       with:
         node-version: '22.20.0'
 
-    # 3. 依存パッケージをインストール（Yarn 使用）
+    # 3. 依存パッケージをインストール
     - name: 依存パッケージをインストール
       run: yarn install --frozen-lockfile
 
     # 4. Next.js をビルドして静的サイトを生成
     - name: Next.js をビルドして静的サイトを生成
-      run: |
-        yarn build
-        yarn export
+      run: yarn build
 
     # 5. EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
     - name: EC2 にファイルを差分コピー（rsyncで差分更新＆古いファイル削除）
