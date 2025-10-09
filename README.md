@@ -4,12 +4,8 @@ cd tsumiage-front
 
 cp .env.example .env.development
 
-nvm use v16.13.2
+nvm use
 
 yarn install
 
 yarn dev
-
-<!-- node v16.13.2 -->
-
-nvm use v16.13.2;yarn install;yarn dev
