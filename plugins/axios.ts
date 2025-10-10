@@ -1,5 +1,3 @@
-import Router from "next/router";
-import { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import axios from "axios";
 
 export const api = axios.create({
@@ -7,7 +5,7 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use((req: AxiosRequestConfig) => {
+api.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (!req.headers) return req;
   req.headers.Accept = "application/json";
@@ -16,21 +14,13 @@ api.interceptors.request.use((req: AxiosRequestConfig) => {
 });
 
 api.interceptors.response.use(
-  (res: AxiosResponse) => {
-    if (res.config.baseURL) {
-      console.log(res.config.baseURL + res.config.url, res);
-    }
+  (res) => {
+    if (res.config.baseURL) console.log(res.config.baseURL + res.config.url, res);
     return res;
   },
-  (err: AxiosError) => {
-    if (axios.isCancel(err)) {
-      console.error("リクエストがキャンセルされました");
-    } else {
-      console.error(err.response);
-    }
-    if (err.response?.status == 429) {
-      alert("一定時間にアクセスが集中したため、しばらくアクセスできません");
-    }
+  (err) => {
+    if (axios.isCancel(err)) console.error("リクエストがキャンセルされました");
+    else console.error(err.response);
     throw err;
   }
 );
