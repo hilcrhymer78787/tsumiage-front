@@ -1,12 +1,11 @@
-import { AxiosError } from "axios";
 import { SetStateAction } from "react";
 import { useSnackbar } from "./useSnackbar";
-import { useLoginInfo } from "./useLoginInfo";
 import { CmnErr } from "../types/cmnErr";
+import { useLogout } from "../user/useLogout";
 
 export const useErrHandler = () => {
   const { setSnackbar } = useSnackbar();
-  const { logout } = useLoginInfo();
+  const { logout } = useLogout();
 
   const errHandler = (
     err: CmnErr<any>,

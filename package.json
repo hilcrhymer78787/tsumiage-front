@@ -9,7 +9,8 @@
     "format": "prettier --write .",
     "lint": "next lint --fix",
     "tsc": "tsc --watch",
-    "test": "jest --env=jsdom --verbose"
+    "test": "jest --env=jsdom --verbose",
+    "fix": "yarn format;yarn lint;tsc --watch"
   },
   "jest": {
     "testPathIgnorePatterns": [

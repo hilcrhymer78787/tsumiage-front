@@ -45,6 +45,7 @@ export const useBasicAuth = () => {
     if (validation(data)) return;
     setError("");
     setIsLoading(true);
+    await api.get("/sanctum/csrf-cookie");
     return api({
       url: "/api/user/auth/basic",
       method: "POST",
@@ -52,7 +53,6 @@ export const useBasicAuth = () => {
     })
       .then((res: ApiRes) => {
         const user = res.data.data;
-        localStorage.setItem("token", user.token);
         setLoginInfo(user);
         setSnackbar(`${user.name}さんこんにちは`);
         return res;

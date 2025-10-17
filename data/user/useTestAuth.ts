@@ -19,13 +19,13 @@ export const useTestAuth = () => {
   const testAuth = async () => {
     setError("");
     setIsLoading(true);
+    await api.get("/sanctum/csrf-cookie");
     return api({
       url: "/api/user/auth/test",
       method: "GET",
     })
       .then((res: ApiRes) => {
         const user = res.data.data;
-        localStorage.setItem("token", user.token);
         setLoginInfo(user);
         setSnackbar("テストユーザーでログインしました");
         return res;

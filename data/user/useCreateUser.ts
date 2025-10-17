@@ -73,13 +73,13 @@ export const useCreateUser = () => {
 
     setError("");
     setIsLoading(true);
+    await api.get("/sanctum/csrf-cookie");
     return api({
       url: "/api/user/create",
       method: "POST",
       data: postData,
     })
       .then((res: ApiRes) => {
-        localStorage.setItem("token", res.data.data.token);
         setLoginInfo(res.data.data);
         setSnackbar(`ユーザー情報を${!!data.id ? "更新" : "作成"}しました`);
         return res;

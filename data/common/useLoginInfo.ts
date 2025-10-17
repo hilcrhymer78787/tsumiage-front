@@ -17,9 +17,5 @@ if (process.env.NODE_ENV === "development") {
 
 export const useLoginInfo = () => {
   const [loginInfo, setLoginInfo] = useRecoilState<LoginInfo | null>(loginInfoAtom);
-  const logout = () => {
-    setLoginInfo(null);
-    localStorage.removeItem("token");
-  };
-  return { loginInfo, setLoginInfo, logout };
+  return { loginInfo, setLoginInfo };
 };

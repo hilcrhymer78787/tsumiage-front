@@ -17,7 +17,7 @@ import { useDeleteUser } from "@/data/user/useDeleteUser";
 import { LoginInfo } from "@/data/types/loginInfo";
 import RStack from "@/components/common/RStack";
 import FileUploader from "@/components/common/FileUploader";
-import { useLoginInfo } from "@/data/common/useLoginInfo";
+import { useLogout } from "@/data/user/useLogout";
 
 const CreateUser = ({
   onCloseMyself,
@@ -36,6 +36,7 @@ const CreateUser = ({
     createUser,
     isLoading: createLoading,
   } = useCreateUser();
+  const { logout } = useLogout();
   const { deleteUser, error: deleteError, isLoading: deleteLoading } = useDeleteUser();
   const [passwordEditMode, setPasswordEditMode] = useState(!loginInfo);
   const [name, setName] = useState(loginInfo?.name ?? "");
@@ -44,8 +45,6 @@ const CreateUser = ({
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [file, setFile] = useState<File | null>(null);
-
-  const { logout } = useLoginInfo();
 
   const apiCreateUser = async () => {
     const res = await createUser({
