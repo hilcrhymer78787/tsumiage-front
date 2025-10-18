@@ -80,7 +80,6 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
             </LoadingButton>
           </CardActions>
         </Card>
-        {process.env.NEXT_PUBLIC_API_BASE_URL}
       </Center>
     </Container>
   );
