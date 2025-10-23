@@ -8,6 +8,7 @@ import { useBasicAuth } from "@/data/user/useBasicAuth";
 import RStack from "./RStack";
 import Center from "./Center";
 import ErrTxt from "./ErrTxt";
+import { usePasswordForgot } from "@/data/user/usePasswordForgot";
 
 const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => {
   const {
@@ -18,6 +19,7 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
     passwordError,
   } = useBasicAuth();
   const { testAuth, isLoading: testAuthLoading } = useTestAuth();
+  const { passwordForgot, isLoading: passwordForgotLoading } = usePasswordForgot();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -52,6 +54,17 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
                 type="password"
               />
               <ErrTxt txt={message} p={0} />
+              {/* TODO */}
+              <RStack justifyContent="flex-end">
+                <Button
+                  onClick={() => {
+                    if (!confirm(`${email}宛にパスワードリセットメールを送信しますか？`)) return;
+                    passwordForgot({ email });
+                  }}
+                >
+                  パスワードを忘れた場合
+                </Button>
+              </RStack>
               <RStack justifyContent="flex-end">
                 <LoadingButton
                   color="inherit"
