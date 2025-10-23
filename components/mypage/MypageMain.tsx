@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -17,9 +18,12 @@ import CreateUser from "@/components/user/CreateUser";
 import UserImg from "@/components/common/UserImg";
 import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { useLogout } from "@/data/user/useLogout";
+import { useEmailVerify } from "@/data/user/useEmailVerify";
+import { LoadingButton } from "@mui/lab";
 
 const MypageMain = () => {
   const { loginInfo } = useLoginInfo();
+  const { emailVerify, successMsg, isLoading } = useEmailVerify();
   const { logout } = useLogout();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,9 +34,10 @@ const MypageMain = () => {
 
   const onClickEmailVerify = () => {
     if (!confirm("メール認証を行いますか？")) return;
-    //
+    emailVerify();
   };
 
+  if (!loginInfo) return <></>;
   return (
     <>
       <Card>
@@ -51,8 +56,15 @@ const MypageMain = () => {
                 />
               </ListItem>
             </Box>
-            {/* TODO */}
-            {/* <Button onClick={onClickEmailVerify}>メール認証を行う</Button> */}
+            {!!successMsg ? (
+              <Typography>{successMsg}</Typography>
+            ) : (
+              !loginInfo.email_verified_at && (
+                <LoadingButton onClick={onClickEmailVerify} loading={isLoading}>
+                  メール認証を行う
+                </LoadingButton>
+              )
+            )}
           </Stack>
         </CardContent>
         <CardActions>
