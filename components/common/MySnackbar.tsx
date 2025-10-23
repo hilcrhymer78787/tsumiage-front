@@ -1,6 +1,6 @@
-import React from "react";
-import { Alert, Button, Slide, SlideProps, Snackbar } from "@mui/material";
+import { Alert, Slide, SlideProps, Snackbar } from "@mui/material";
 import { useSnackbar } from "@/data/common/useSnackbar";
+import { SyntheticEvent } from "react";
 
 const SlideTransition = (props: SlideProps) => <Slide {...props} direction="left" />;
 
@@ -8,9 +8,8 @@ const MySnackbar = () => {
   const { snackbars, handleClose } = useSnackbar();
 
   // ✅ id 付きで呼べる共通ハンドラ
-  const createHandleClose =
-    (id: number) => (event?: React.SyntheticEvent | Event, reason?: string) =>
-      handleClose(id, event, reason);
+  const createHandleClose = (id: number) => (event?: SyntheticEvent | Event, reason?: string) =>
+    handleClose(id, event, reason);
 
   return (
     <>

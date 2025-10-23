@@ -1,4 +1,13 @@
-import { Button, Card, CardActions, CardHeader, Container, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardHeader,
+  Container,
+  Dialog,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
 import { LoadingButton } from "@mui/lab";
@@ -9,8 +18,10 @@ import RStack from "./RStack";
 import Center from "./Center";
 import ErrTxt from "./ErrTxt";
 import { usePasswordForgot } from "@/data/user/usePasswordForgot";
+import ForgotPasswordDialog from "@/components/common/ForgotPasswordDialog";
 
 const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => {
+  const { testAuth, isLoading: testAuthLoading } = useTestAuth();
   const {
     basicAuth,
     isLoading: basicAuthLoading,
@@ -18,10 +29,16 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
     emailError,
     passwordError,
   } = useBasicAuth();
-  const { testAuth, isLoading: testAuthLoading } = useTestAuth();
-  const { passwordForgot, isLoading: passwordForgotLoading } = usePasswordForgot();
+  const {
+    error,
+    emailError: passwordForgotEmailError,
+    successMsg,
+    passwordForgot,
+    isLoading: passwordForgotLoading,
+  } = usePasswordForgot();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,16 +71,20 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
                 type="password"
               />
               <ErrTxt txt={message} p={0} />
-              {/* TODO */}
               <RStack justifyContent="flex-end">
-                <Button
-                  onClick={() => {
-                    if (!confirm(`${email}宛にパスワードリセットメールを送信しますか？`)) return;
-                    passwordForgot({ email });
-                  }}
-                >
-                  パスワードを忘れた場合
-                </Button>
+                <Button onClick={() => setOpen(true)}>パスワードを忘れた場合</Button>
+                <Dialog open={open} onClose={() => setOpen(false)}>
+                  {!!open && (
+                    <ForgotPasswordDialog
+                      passwordForgot={passwordForgot}
+                      isLoading={passwordForgotLoading}
+                      successMsg={successMsg}
+                      error={error}
+                      defaultEmail={email}
+                      emailError={passwordForgotEmailError}
+                    />
+                  )}
+                </Dialog>
               </RStack>
               <RStack justifyContent="flex-end">
                 <LoadingButton
