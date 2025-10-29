@@ -2,9 +2,11 @@ import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useEmailValid } from "@/data/user/useEmailValid";
 import { Alert } from "@mui/material";
+import { useBearerAuth } from "@/data/user/useBearerAuth";
 
 const VerifyPage = () => {
   const { error, emailValid } = useEmailValid();
+  const { bearerAuth } = useBearerAuth();
   const router = useRouter();
   const id = useMemo(() => String(router.query.id), [router.query.id]);
   const hash = useMemo(() => String(router.query.hash), [router.query.hash]);
@@ -13,7 +15,9 @@ const VerifyPage = () => {
     const validateEmail = async () => {
       if (!id || !hash) return;
       const res = await emailValid(id, hash);
-      if (!!res) router.push("/mypage");
+      if (!res) return;
+      await bearerAuth();
+      router.push("/mypage");
     };
 
     validateEmail();
