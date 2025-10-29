@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardHeader, TextField, Typography } from "@mui/material";
+import { Alert, Box, Card, CardActions, CardHeader, Stack, TextField } from "@mui/material";
 
 import { CardContent } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -25,23 +25,23 @@ const CreateFriend = () => {
     <Card>
       <CardHeader title="友達申請" />
       <CardContent sx={{ p: "30px 15px" }}>
-        {!!message ? (
-          <Typography color="primary" sx={{ textAlign: "center" }}>
-            {message}
-          </Typography>
-        ) : (
-          <TextField
-            onKeyPress={(e) => {
-              if (e?.key === "Enter") onClickCreate();
-            }}
-            error={!!emailError}
-            helperText={emailError}
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
-            label="メールアドレス"
-          />
-        )}
-        <ErrTxt txt={error} p="10px 5px 0" />
+        <Stack gap={2}>
+          {!!message ? (
+            <Alert severity="success">{message}</Alert>
+          ) : (
+            <TextField
+              onKeyDown={(e) => {
+                if (e?.key === "Enter") onClickCreate();
+              }}
+              error={!!emailError}
+              helperText={emailError}
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
+              label="メールアドレス"
+            />
+          )}
+          <ErrTxt txt={error} p="10px 5px 0" />
+        </Stack>
       </CardContent>
 
       <CardActions disableSpacing>

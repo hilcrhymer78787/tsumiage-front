@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -10,7 +11,6 @@ import {
   ListItemAvatar,
   ListItemText,
   Stack,
-  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -57,7 +57,7 @@ const MypageMain = () => {
               </ListItem>
             </Box>
             {!!successMsg ? (
-              <Typography>{successMsg}</Typography>
+              <Alert severity="success">{successMsg}</Alert>
             ) : (
               !loginInfo.email_verified_at && (
                 <LoadingButton onClick={onClickEmailVerify} loading={isLoading}>

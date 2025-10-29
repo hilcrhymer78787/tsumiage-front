@@ -29,7 +29,7 @@ const ForgotPasswordDialog = ({
           <Alert severity="success">{successMsg}</Alert>
         ) : (
           <TextField
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e?.key === "Enter") onClickCreate();
             }}
             error={!!emailError}
