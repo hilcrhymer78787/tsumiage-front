@@ -1,13 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import {
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Card, CardActions, CardContent, CardHeader, TextField } from "@mui/material";
 import { useState } from "react";
 import ErrTxt from "./ErrTxt";
 import SendIcon from "@mui/icons-material/Send";
@@ -34,9 +26,7 @@ const ForgotPasswordDialog = ({
       <CardHeader title="パスワード再発行" />
       <CardContent sx={{ p: "30px 15px" }}>
         {!!successMsg ? (
-          <Typography color="primary" sx={{ textAlign: "center" }}>
-            {successMsg}
-          </Typography>
+          <Alert severity="success">{successMsg}</Alert>
         ) : (
           <TextField
             onKeyPress={(e) => {
@@ -52,13 +42,15 @@ const ForgotPasswordDialog = ({
         <ErrTxt txt={error} p="10px 5px 0" />
       </CardContent>
 
-      <CardActions disableSpacing>
-        <Box />
-        <LoadingButton onClick={onClickCreate} variant="contained" loading={isLoading}>
-          送信
-          <SendIcon />
-        </LoadingButton>
-      </CardActions>
+      {!successMsg && (
+        <CardActions disableSpacing>
+          <Box />
+          <LoadingButton onClick={onClickCreate} variant="contained" loading={isLoading}>
+            送信
+            <SendIcon />
+          </LoadingButton>
+        </CardActions>
+      )}
     </Card>
   );
 };

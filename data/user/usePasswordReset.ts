@@ -1,11 +1,11 @@
-// TODO
 import { api } from "@/plugins/axios";
 import { useErrHandler } from "@/data/common/useErrHandler";
 import { useState } from "react";
 import { useSnackbar } from "../common/useSnackbar";
 import { CmnErr } from "@/data/types/cmnErr";
 import { CmnRes } from "@/data/types/cmnRes";
-import { Success } from "@/data/types/success";
+import { LoginInfo } from "../types/loginInfo";
+import { useLoginInfo } from "../common/useLoginInfo";
 
 type ApiReq = {
   email: string;
@@ -13,7 +13,7 @@ type ApiReq = {
   password_confirmation: string;
   token: string;
 };
-type ApiRes = CmnRes<Success>;
+type ApiRes = CmnRes<LoginInfo>;
 type ApiErr = CmnErr<{
   emailError?: string;
   passwordError?: string;
@@ -21,12 +21,12 @@ type ApiErr = CmnErr<{
 
 export const usePasswordReset = () => {
   const { errHandler } = useErrHandler();
+  const { setLoginInfo } = useLoginInfo();
   const { setSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
 
   const passwordReset = async (data: ApiReq) => {
     setError("");
@@ -40,8 +40,8 @@ export const usePasswordReset = () => {
       data,
     })
       .then((res: ApiRes) => {
-        setSnackbar(res.data.data.message);
-        setSuccessMsg(res.data.data.message);
+        setSnackbar("パスワードを変更しました。");
+        setLoginInfo(res.data.data);
         return res;
       })
       .catch((err: ApiErr) => {
@@ -61,7 +61,6 @@ export const usePasswordReset = () => {
   return {
     passwordReset,
     isLoading,
-    successMsg,
     error,
     emailError,
     passwordError,

@@ -7,19 +7,20 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const { passwordReset, isLoading, successMsg, error } = usePasswordReset();
+  const { passwordReset, isLoading, error } = usePasswordReset();
 
   const token = useMemo(() => String(router.query.token), [router.query.token]);
   const email = useMemo(() => String(router.query.email), [router.query.email]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    passwordReset({
+    const res = await passwordReset({
       email,
       password,
       password_confirmation: passwordConfirmation,
       token,
     });
+    if (!!res) router.push("/");
   };
 
   return (
@@ -80,7 +81,6 @@ export default function ResetPasswordPage() {
         </Box>
       </form>
 
-      {successMsg && <Alert severity="success">{successMsg}</Alert>}
       {error && <Alert severity="error">{error}</Alert>}
     </Stack>
   );
