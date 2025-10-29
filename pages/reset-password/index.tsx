@@ -1,30 +1,25 @@
 // TODO
-import { useState, useEffect } from "react";
+import { useState, useMemo, FormEvent } from "react";
 import { useRouter } from "next/router";
 import { usePasswordReset } from "@/data/user/usePasswordReset";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const [token, setToken] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [password, setPassword] = useState("");
   const { passwordReset, isLoading, successMsg, error } = usePasswordReset();
 
-  // queryからtokenを取得
-  useEffect(() => {
-    if (!router.isReady) return;
-    const t = router.query.token;
-    const e = router.query.email;
-    if (typeof t === "string" && typeof e === "string") {
-      setToken(t);
-      setEmail(e);
-    }
-  }, [router]);
+  const token = useMemo(() => {
+    return String(router.query.token);
+  }, [router.query.token]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const email = useMemo(() => {
+    return String(router.query.email);
+  }, [router.query.email]);
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    await passwordReset({
+    passwordReset({
       email,
       password,
       password_confirmation: passwordConfirmation,
@@ -37,7 +32,7 @@ export default function ResetPasswordPage() {
       <h1 className="text-2xl font-bold mb-4">パスワードリセット</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>{email}</div>
+        <div>{router.query.email}</div>
 
         <div>
           <label>新しいパスワード</label>
