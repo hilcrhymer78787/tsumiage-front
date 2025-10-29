@@ -32,6 +32,7 @@ const ForgotPasswordDialog = ({
             onKeyDown={(e) => {
               if (e?.key === "Enter") onClickCreate();
             }}
+            disabled={isLoading}
             error={!!emailError}
             helperText={emailError}
             value={email}
