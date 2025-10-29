@@ -35,7 +35,7 @@ export const usePasswordReset = () => {
     setIsLoading(true);
 
     return api({
-      url: "/api/password/reset",
+      url: "/api/user/auth/password/reset",
       method: "POST",
       data,
     })
