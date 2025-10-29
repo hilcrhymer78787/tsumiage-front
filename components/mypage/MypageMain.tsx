@@ -18,12 +18,12 @@ import CreateUser from "@/components/user/CreateUser";
 import UserImg from "@/components/common/UserImg";
 import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { useLogout } from "@/data/user/useLogout";
-import { useEmailVerify } from "@/data/user/useEmailVerify";
+import { useEmailVerifySend } from "@/data/user/useEmailVerifySend";
 import { LoadingButton } from "@mui/lab";
 
 const MypageMain = () => {
   const { loginInfo } = useLoginInfo();
-  const { emailVerify, successMsg, isLoading } = useEmailVerify();
+  const { emailVerify, successMsg, isLoading } = useEmailVerifySend();
   const { logout } = useLogout();
   const [isOpen, setIsOpen] = useState(false);
 

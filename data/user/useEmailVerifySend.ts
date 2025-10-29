@@ -8,7 +8,7 @@ type ApiReq = {};
 type ApiRes = CmnRes<Success>;
 type ApiErr = CmnErr;
 
-export const useEmailVerify = () => {
+export const useEmailVerifySend = () => {
   const { errHandler } = useErrHandler();
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
@@ -17,7 +17,7 @@ export const useEmailVerify = () => {
     setError("");
     setIsLoading(true);
     return api({
-      url: "/api/user/auth/email/verify",
+      url: "/api/user/auth/user/auth/email/verify/send",
       method: "POST",
     })
       .then((res: ApiRes) => {

@@ -1,12 +1,12 @@
 // TODO ファイル名検討
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
-import { useEmailValid } from "@/data/user/useEmailValid";
+import { useEmailVerifyIdHash } from "@/data/user/useEmailVerifyIdHash";
 import { Alert } from "@mui/material";
 import { useBearerAuth } from "@/data/user/useBearerAuth";
 
 const VerifyPage = () => {
-  const { error, emailValid } = useEmailValid();
+  const { error, EmailVerifyIdHash } = useEmailVerifyIdHash();
   const { bearerAuth } = useBearerAuth();
   const router = useRouter();
   const id = useMemo(() => String(router.query.id), [router.query.id]);
@@ -15,7 +15,7 @@ const VerifyPage = () => {
   useEffect(() => {
     const validateEmail = async () => {
       if (!id || !hash) return;
-      const res = await emailValid(id, hash);
+      const res = await EmailVerifyIdHash(id, hash);
       if (!res) return;
       await bearerAuth();
       router.push("/mypage");

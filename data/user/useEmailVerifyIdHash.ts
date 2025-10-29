@@ -9,16 +9,16 @@ type ApiReq = {};
 type ApiRes = CmnRes<Success>;
 type ApiErr = CmnErr;
 
-export const useEmailValid = () => {
+export const useEmailVerifyIdHash = () => {
   const { errHandler } = useErrHandler();
   const { setSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const emailValid = async (id: string, hash: string) => {
+  const EmailVerifyIdHash = async (id: string, hash: string) => {
     setError("");
     setIsLoading(true);
     return api({
-      url: `/api/email/verify/${id}/${hash}`,
+      url: `/api/user/auth/email/verify/${id}/${hash}`,
       method: "GET",
     })
       .then((res: ApiRes) => {
@@ -33,7 +33,7 @@ export const useEmailValid = () => {
       });
   };
   return {
-    emailValid,
+    EmailVerifyIdHash,
     error,
     isLoading,
   };
