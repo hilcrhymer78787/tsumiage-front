@@ -16,7 +16,6 @@ type ApiReq = {
 type ApiRes = CmnRes<LoginInfo>;
 type ApiErr = CmnErr<{
   emailError?: string;
-  passwordError?: string;
 }>;
 
 export const usePasswordReset = () => {
@@ -25,13 +24,24 @@ export const usePasswordReset = () => {
   const { setSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+
+  const validation = (data: ApiReq) => {
+    let isError: boolean = false;
+    setError("");
+    if (data.password != data.password_confirmation) {
+      setError("パスワードが一致しません");
+      isError = true;
+    }
+    if (data.password.length < 8) {
+      setError("パスワードは8桁以上で設定してください");
+      isError = true;
+    }
+    return isError;
+  };
 
   const passwordReset = async (data: ApiReq) => {
+    if (validation(data)) return;
     setError("");
-    setEmailError("");
-    setPasswordError("");
     setIsLoading(true);
 
     return api({
@@ -45,13 +55,7 @@ export const usePasswordReset = () => {
         return res;
       })
       .catch((err: ApiErr) => {
-        const emailErr = err.response?.data?.data?.emailError ?? "";
-        const passwordErr = err.response?.data?.data?.passwordError ?? "";
-        setEmailError(emailErr);
-        setPasswordError(passwordErr);
-        if (!emailErr && !passwordErr) {
-          errHandler(err, setError, true);
-        }
+        errHandler(err, setError, true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -62,7 +66,5 @@ export const usePasswordReset = () => {
     passwordReset,
     isLoading,
     error,
-    emailError,
-    passwordError,
   };
 };

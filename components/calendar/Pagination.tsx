@@ -17,14 +17,8 @@ const Pagination = ({
 }) => {
   const fontSize = "27px";
   const router = useRouter();
-
-  const year = useMemo(() => {
-    return Number(router.query.year);
-  }, [router.query.year]);
-
-  const month = useMemo(() => {
-    return Number(router.query.month);
-  }, [router.query.month]);
+  const year = useMemo(() => Number(router.query.year), [router.query.year]);
+  const month = useMemo(() => Number(router.query.month), [router.query.month]);
 
   const onClickPrevMonth = () => {
     router.push({

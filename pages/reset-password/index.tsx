@@ -2,25 +2,30 @@ import { useState, useMemo, FormEvent } from "react";
 import { useRouter } from "next/router";
 import { usePasswordReset } from "@/data/user/usePasswordReset";
 import { Box, Button, TextField, Typography, Alert, CircularProgress, Stack } from "@mui/material";
+import { KeyboardEvent } from "react";
+import { LoadingButton } from "@mui/lab";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
   const { passwordReset, isLoading, error } = usePasswordReset();
 
   const token = useMemo(() => String(router.query.token), [router.query.token]);
   const email = useMemo(() => String(router.query.email), [router.query.email]);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const res = await passwordReset({
       email,
       password,
-      password_confirmation: passwordConfirmation,
+      password_confirmation: passwordAgain,
       token,
     });
     if (!!res) router.push("/");
+  };
+
+  const onKeyDown = (e?: KeyboardEvent<HTMLDivElement>) => {
+    if (e?.key === "Enter") handleSubmit();
   };
 
   return (
@@ -40,46 +45,22 @@ export default function ResetPasswordPage() {
       </Typography>
       <Typography>{email}</Typography>
 
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="新しいパスワード"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          fullWidth
-          margin="normal"
-          required
-        />
+      <TextField
+        onKeyDown={onKeyDown}
+        value={password}
+        onChange={(e) => setPassword(e.currentTarget.value)}
+        label="パスワード"
+      />
+      <TextField
+        onKeyDown={onKeyDown}
+        value={passwordAgain}
+        onChange={(e) => setPasswordAgain(e.currentTarget.value)}
+        label="パスワード確認"
+      />
 
-        <TextField
-          label="パスワード確認"
-          type="password"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          fullWidth
-          margin="normal"
-          required
-        />
-
-        <Box sx={{ mt: 2, position: "relative" }}>
-          <Button type="submit" variant="contained" color="primary" fullWidth disabled={isLoading}>
-            リセット
-          </Button>
-          {isLoading && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: "primary.main",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
-        </Box>
-      </form>
+      <LoadingButton onClick={handleSubmit} variant="contained" loading={isLoading}>
+        リセット
+      </LoadingButton>
 
       {error && <Alert severity="error">{error}</Alert>}
     </Stack>

@@ -9,10 +9,9 @@ import { useRouter } from "next/router";
 const FriendDetailMain = () => {
   const router = useRouter();
   const { calendars, readWorkMonthLoading, readWorkMonthError, readWorkMonth } = useReadWorkMonth();
-
-  const userId = useMemo(() => {
-    return Number(router.query.id);
-  }, [router.query]);
+  const userId = useMemo(() => Number(router.query.id), [router.query]);
+  const year = useMemo(() => Number(router.query.year), [router.query.year]);
+  const month = useMemo(() => Number(router.query.month), [router.query.month]);
 
   const userName = useMemo(() => {
     const { name } = router.query;
@@ -20,14 +19,6 @@ const FriendDetailMain = () => {
     if (Array.isArray(name)) return "";
     return name;
   }, [router.query]);
-
-  const year = useMemo(() => {
-    return Number(router.query.year);
-  }, [router.query.year]);
-
-  const month = useMemo(() => {
-    return Number(router.query.month);
-  }, [router.query.month]);
 
   const getCalendarData = useCallback(
     async (year?: number, month?: number) => {

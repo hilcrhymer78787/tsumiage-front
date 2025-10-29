@@ -40,7 +40,6 @@ export const usePasswordForgot = () => {
       data,
     })
       .then((res: ApiRes) => {
-        setSnackbar(res.data.data.message);
         setSuccessMsg(res.data.data.message);
         return res;
       })
