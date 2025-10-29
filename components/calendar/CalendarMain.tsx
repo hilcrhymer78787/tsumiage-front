@@ -17,19 +17,9 @@ const CalendarMain = () => {
   const { resetWork, resetWorkLoading } = useResetWork();
   const { calendars, myTomonthCalendars, readWorkMonthLoading, readWorkMonthError, readWorkMonth } =
     useReadWorkMonth();
-
-  const year = useMemo(() => {
-    return Number(router.query.year);
-  }, [router.query.year]);
-
-  const month = useMemo(() => {
-    return Number(router.query.month);
-  }, [router.query.month]);
-
-  const userId = useMemo(() => {
-    if (!loginInfo?.id) return 0;
-    return loginInfo.id;
-  }, [loginInfo]);
+  const year = useMemo(() => Number(router.query.year), [router.query.year]);
+  const month = useMemo(() => Number(router.query.month), [router.query.month]);
+  const userId = useMemo(() => loginInfo?.id || 0, [loginInfo]);
 
   const getCalendarData = useCallback(async () => {
     await readWorkMonth({ user_id: userId, year, month });
