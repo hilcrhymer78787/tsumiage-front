@@ -19,15 +19,22 @@ import RStack from "../common/RStack";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useDeleteTask } from "@/data/task/useDeleteTask";
+import { useRestoreTask } from "@/data/task/useRestoreTask";
 
 const TrashTaskItem = ({ task, apiTaskRead }: { task: Task; apiTaskRead: () => void }) => {
   const { deleteTask } = useDeleteTask();
+  const { restoreTask } = useRestoreTask();
   return (
     <ListItem
-      sx={{ p: 0 }}
       secondaryAction={
         <RStack>
-          <IconButton>
+          <IconButton
+            onClick={async () => {
+              if (!confirm("タスクを復元しますか？")) return;
+              await restoreTask({ id: task.id });
+              apiTaskRead();
+            }}
+          >
             <RestoreFromTrashIcon />
           </IconButton>
           <IconButton
@@ -43,9 +50,7 @@ const TrashTaskItem = ({ task, apiTaskRead }: { task: Task; apiTaskRead: () => v
         </RStack>
       }
     >
-      <ListItemButton>
-        <ListItemText primary={task.name} secondary={`削除日時：${task.deletedAt}`} />
-      </ListItemButton>
+      <ListItemText primary={task.name} secondary={`削除日時：${task.deletedAt}`} />
     </ListItem>
   );
 };
