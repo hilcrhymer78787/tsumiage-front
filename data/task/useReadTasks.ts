@@ -7,6 +7,7 @@ import { CmnRes } from "@/data/types/cmnRes";
 type ApiReq = {
   date: string;
   user_id: number;
+  is_only_trashed?: boolean;
 };
 type ApiRes = CmnRes<{
   date: string;

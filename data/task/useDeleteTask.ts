@@ -7,6 +7,7 @@ import { CmnErr } from "@/data/types/cmnErr";
 import { CmnRes } from "@/data/types/cmnRes";
 type ApiReq = {
   id: number;
+  is_hard_delete?: boolean;
 };
 type ApiRes = CmnRes<Success>;
 type ApiErr = CmnErr;

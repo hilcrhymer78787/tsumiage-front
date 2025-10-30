@@ -12,21 +12,17 @@ const TaskMain = () => {
   const { loginInfo } = useLoginInfo();
   const { tasks, notDoneTasks, doneTasks, notNecessaryTasks, readTasks, isFirstLoading, error } =
     useReadTasks();
-  const [scrollY, setScrollY] = useState(0);
 
   const apiTaskRead = () => readTasks({ date, user_id: loginInfo?.id ?? 0 });
 
   useEffect(() => {
     apiTaskRead();
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <TaskHeader isGray={!!scrollY} apiTaskRead={apiTaskRead} />
+      <TaskHeader apiTaskRead={apiTaskRead} />
       <ApiHandle
         isLoading={isFirstLoading}
         isError={!!error}
