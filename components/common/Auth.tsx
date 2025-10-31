@@ -58,7 +58,7 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
                 helperText={emailError}
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
-                label="email"
+                label="メールアドレス"
                 type="email"
               />
               <TextField
@@ -67,7 +67,7 @@ const Auth = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => 
                 helperText={passwordError}
                 value={password}
                 onChange={(e) => setPassword(e.currentTarget.value)}
-                label="password"
+                label="パスワード"
                 type="password"
               />
               <ErrTxt txt={message} p={0} />
