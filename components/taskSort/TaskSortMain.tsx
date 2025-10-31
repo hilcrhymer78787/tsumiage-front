@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useReadTasks } from "@/data/task/useReadTasks";
 
 import Sortable from "@/components/common/Sortable";
-import TaskSortHeader from "@/components/task/TaskSortHeader";
+import TaskReturnHeader from "@/components/common/TaskReturnHeader";
 import dayjs from "dayjs";
 import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { useSortTasks } from "@/data/task/useSortTasks";
@@ -33,7 +33,7 @@ const TaskSortMain = () => {
 
   return (
     <>
-      <TaskSortHeader />
+      <TaskReturnHeader />
       <ApiHandle
         isLoading={isFirstLoading}
         isError={!!error}
