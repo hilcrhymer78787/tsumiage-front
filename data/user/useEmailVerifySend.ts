@@ -17,7 +17,7 @@ export const useEmailVerifySend = () => {
     setError("");
     setIsLoading(true);
     return api({
-      url: "/api/user/auth/user/auth/email/verify/send",
+      url: "/api/user/auth/email/verify/send",
       method: "POST",
     })
       .then((res: ApiRes) => {
