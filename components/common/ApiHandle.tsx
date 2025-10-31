@@ -1,5 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import type { ReactNode } from "react";
+import ErrTxt from "./ErrTxt";
 
 const ApiHandle = ({
   errorTxt = null,
@@ -21,7 +22,7 @@ const ApiHandle = ({
   if (isError) {
     return (
       <Box p={p}>
-        <Typography color="error">{errorTxt}</Typography>
+        <ErrTxt txt={errorTxt} />
       </Box>
     );
   }
