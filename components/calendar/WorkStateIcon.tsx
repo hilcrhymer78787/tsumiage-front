@@ -10,9 +10,9 @@ const WORK_STATES: {
   color: SvgIconProps["color"];
   opacity: number;
 }[] = [
-  { value: 0, icon: CheckIcon, color: "error", opacity: 1 },
-  { value: 1, icon: CheckIcon, color: "primary", opacity: 1 },
-  { value: 2, icon: RemoveIcon, color: "primary", opacity: 0.3 },
+  { value: 0, icon: CheckIcon, color: "error", opacity: 1 }, //未達成
+  { value: 1, icon: CheckIcon, color: "primary", opacity: 1 }, //達成
+  { value: 2, icon: RemoveIcon, color: "primary", opacity: 0.3 }, //達成不要
 ];
 
 const WorkStateIcon = ({ state }: { state: WorkState }) => {
