@@ -13,7 +13,6 @@ import dayjs from "dayjs";
 
 const CalendarMain = () => {
   const router = useRouter();
-  const [isFirstRendered, setIsFirstRendered] = useState(false);
   const { loginInfo } = useLoginInfo();
   const { resetWork, resetWorkLoading } = useResetWork();
   const { calendars, myTomonthCalendars, readWorkMonthLoading, readWorkMonthError, readWorkMonth } =
@@ -41,11 +40,9 @@ const CalendarMain = () => {
 
   useEffect(() => {
     getCalendarData();
-    setTimeout(() => setIsFirstRendered(true), 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year, month]);
 
-  if (!isFirstRendered) return <></>;
   if (!!readWorkMonthError) return <ErrTxt txt={readWorkMonthError} />;
   if (displayCalendars === null) {
     if (readWorkMonthLoading) return <Loading />;
