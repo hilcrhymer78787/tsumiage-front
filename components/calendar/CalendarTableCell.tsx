@@ -1,5 +1,5 @@
 import { Box, Button, CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Calendar } from "@/data/types/calendar";
 import WorkStateIcon from "@/components/calendar/WorkStateIcon";
@@ -36,6 +36,10 @@ const CalendarTableCell = ({
     if (res) setState(newState);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    setState(task?.work.state ?? 0);
+  }, [task?.work.state]);
 
   if (dayjs(date).isAfter(dayjs(), "day")) return <Box />;
   if (dayjs(createdAt).isAfter(dayjs(date), "day")) return <Box />;

@@ -38,9 +38,10 @@ export const useReadWorkMonth = () => {
   const { loginInfo } = useLoginInfo();
   const [readWorkMonthLoading, setReadWorkMonthLoading] = useState(false);
   const [readWorkMonthError, setReadWorkMonthError] = useState("");
-  const [cacheCalendars, setCacheCalendars] = useRecoilState<Calendar[] | null>(calendarsAtom);
-  const [calendars, setCalendars] = useState<Calendar[] | null>(cacheCalendars);
-  const [myTomonthCalendars, setMyTomonthCalendars] = useState<Calendar[] | null>(cacheCalendars);
+  const [calendars, setCalendars] = useState<Calendar[] | null>(null);
+  const [myTomonthCalendars, setMyTomonthCalendars] = useRecoilState<Calendar[] | null>(
+    calendarsAtom
+  );
 
   const readWorkMonth = async (params: ApiReq) => {
     const isMyTomonth =
@@ -55,10 +56,8 @@ export const useReadWorkMonth = () => {
       params,
     })
       .then((res: ApiRes) => {
-        const newCalendars = res.data.data.calendars;
-        if (isMyTomonth) setMyTomonthCalendars(newCalendars);
-        setCalendars(newCalendars);
-        setCacheCalendars(newCalendars);
+        if (isMyTomonth) setMyTomonthCalendars(res.data.data.calendars);
+        setCalendars(res.data.data.calendars);
         return res;
       })
       .catch((err: ApiErr) => {
