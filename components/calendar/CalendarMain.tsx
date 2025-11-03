@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import CalendarTable from "@/components/calendar/CalendarTable";
 import ErrTxt from "@/components/common/ErrTxt";
@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 
 const CalendarMain = () => {
   const router = useRouter();
+  const [isFirstRendered, setIsFirstRendered] = useState(false);
   const { loginInfo } = useLoginInfo();
   const { resetWork, resetWorkLoading } = useResetWork();
   const { calendars, myTomonthCalendars, readWorkMonthLoading, readWorkMonthError, readWorkMonth } =
@@ -40,9 +41,11 @@ const CalendarMain = () => {
 
   useEffect(() => {
     getCalendarData();
+    setTimeout(() => setIsFirstRendered(true), 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year, month]);
 
+  if (!isFirstRendered) return <></>;
   if (!!readWorkMonthError) return <ErrTxt txt={readWorkMonthError} />;
   if (displayCalendars === null) {
     if (readWorkMonthLoading) return <Loading />;
