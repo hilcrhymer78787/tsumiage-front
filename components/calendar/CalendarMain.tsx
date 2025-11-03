@@ -41,7 +41,7 @@ const CalendarMain = () => {
 
   useEffect(() => {
     getCalendarData();
-    setTimeout(() => setIsFirstRendered(true), 100);
+    setTimeout(() => setIsFirstRendered(true), 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year, month]);
 
