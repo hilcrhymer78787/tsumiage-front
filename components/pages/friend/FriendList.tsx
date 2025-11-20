@@ -2,10 +2,10 @@ import { Button, Card, CardHeader, Dialog, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
-import CreateFriend from "@/components/friend/CreateFriend";
-import FriendItemFrom from "@/components/friend/FriendItemFrom";
-import FriendItemNow from "@/components/friend/FriendItemNow";
-import FriendItemTo from "@/components/friend/FriendItemTo";
+import CreateFriend from "@/components/pages/friend/CreateFriend";
+import FriendItemFrom from "@/components/pages/friend/FriendItemFrom";
+import FriendItemNow from "@/components/pages/friend/FriendItemNow";
+import FriendItemTo from "@/components/pages/friend/FriendItemTo";
 import { useReadInvitation } from "@/data/invitation/useReadInvitation";
 import ApiHandle from "@/components/common/ApiHandle";
 

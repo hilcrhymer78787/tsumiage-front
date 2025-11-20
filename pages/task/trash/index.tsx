@@ -1,5 +1,5 @@
 import Layout from "@/layouts/default";
-import TaskTrashMain from "@/components/taskTrash/TaskTrashMain";
+import TaskTrashMain from "@/components/pages/taskTrash/TaskTrashMain";
 
 const TaskTrash = () => {
   return (

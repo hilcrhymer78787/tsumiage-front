@@ -9,6 +9,7 @@ Tsumiage is a task management and calendar application built with Next.js 12, Re
 ## Development Commands
 
 ### Setup
+
 ```bash
 # Install dependencies
 yarn install
@@ -18,6 +19,7 @@ cp .env.development .env.local
 ```
 
 ### Running the App
+
 ```bash
 # Development server (requires .env.local)
 yarn dev
@@ -33,6 +35,7 @@ yarn start
 ```
 
 ### Code Quality
+
 ```bash
 # Format with Prettier
 yarn format
@@ -77,6 +80,7 @@ yarn test
 ### Key Patterns
 
 **Authentication Flow**:
+
 - App initializes by calling `bearerAuth()` to check authentication status with HTTP-only cookies
 - Login info stored in Recoil atom (`loginInfoAtom` in `data/common/useLoginInfo.ts`)
 - Unauthenticated users see login/registration forms
@@ -84,18 +88,21 @@ yarn test
 
 **Data Fetching Hooks**:
 All API hooks follow this pattern:
+
 - Located in `data/[resource]/use[Action][Resource].ts`
 - Return loading state, error state, and async function
 - Use centralized error handler (`useErrHandler`)
 - Example: `useCreateTask`, `useReadTasks`, `useDeleteTask`
 
 **Component Organization**:
+
 - Feature-specific components in `components/[feature]/`
 - Shared utilities in `components/common/`
 - Main page components named `[Feature]Main.tsx`
 - Item components named `[Feature]Item.tsx`
 
 **Environment Variables**:
+
 - `NEXT_PUBLIC_APP_ENV` - Environment identifier
 - `NEXT_PUBLIC_API_BASE_URL` - Backend API URL (required)
 - Three environment configs: `.env.development`, `.env.production`, `.env.xserver`
@@ -103,6 +110,7 @@ All API hooks follow this pattern:
 ### Recoil State
 
 The app uses HMR-safe Recoil atoms with global storage to prevent duplicate atom keys during development:
+
 ```typescript
 // Pattern used in data/common/useLoginInfo.ts
 export const loginInfoAtom =

@@ -7,10 +7,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import Pagination, { PAGINATION_HEIGHT } from "@/components/calendar/Pagination";
+import Pagination, { PAGINATION_HEIGHT } from "@/components/pages/calendar/Pagination";
 
 import { BOTTOM_NAV_HEIGHT } from "@/plugins/theme";
-import CalendarTableRow from "@/components/calendar/CalendarTableRow";
+import CalendarTableRow from "@/components/pages/calendar/CalendarTableRow";
 import { NAV_WIDTH } from "@/layouts/default";
 import dayjs from "dayjs";
 import { useMedia } from "@/data/media/useMedia";

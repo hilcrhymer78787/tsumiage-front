@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
-import CreateTask from "@/components/task/CreateTask";
+import CreateTask from "@/components/pages/task/CreateTask";
 import { NAV_WIDTH } from "@/layouts/default";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useMedia } from "@/data/media/useMedia";

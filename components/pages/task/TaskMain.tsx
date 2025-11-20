@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import TaskHeader from "@/components/task/TaskHeader";
-import TaskList from "@/components/task/TaskList";
+import TaskHeader from "@/components/pages/task/TaskHeader";
+import TaskList from "@/components/pages/task/TaskList";
 import dayjs from "dayjs";
 import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { useReadTasks } from "@/data/task/useReadTasks";
-import ApiHandle from "../common/ApiHandle";
+import ApiHandle from "@/components/common/ApiHandle";
 import { Stack } from "@mui/material";
 
 const TaskMain = () => {

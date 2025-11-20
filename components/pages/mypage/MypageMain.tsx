@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import CreateUser from "@/components/user/CreateUser";
+import CreateUser from "@/components/pages/user/CreateUser";
 import UserImg from "@/components/common/UserImg";
 import { useLoginInfo } from "@/data/common/useLoginInfo";
 import { useLogout } from "@/data/user/useLogout";

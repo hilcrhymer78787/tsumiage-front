@@ -1,5 +1,5 @@
 import Layout from "@/layouts/default";
-import TaskMain from "@/components/task/TaskMain";
+import TaskMain from "@/components/pages/task/TaskMain";
 
 const Task = () => {
   return (

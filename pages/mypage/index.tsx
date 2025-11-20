@@ -1,5 +1,5 @@
 import Layout from "@/layouts/default";
-import MypageMain from "@/components/mypage/MypageMain";
+import MypageMain from "@/components/pages/mypage/MypageMain";
 
 const Mypage = () => {
   return (

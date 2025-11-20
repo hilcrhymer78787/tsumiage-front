@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from "react";
 
-import CalendarTable from "@/components/calendar/CalendarTable";
+import CalendarTable from "@/components/pages/calendar/CalendarTable";
 import ErrTxt from "@/components/common/ErrTxt";
 import Loading from "@/components/common/Loading";
 import { useReadWorkMonth } from "@/data/work/useReadWorkMonth";

@@ -12,13 +12,13 @@ import { useCreateWork } from "@/data/work/useCreateWork";
 import AddIcon from "@mui/icons-material/Add";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CreateTask from "@/components/task/CreateTask";
+import CreateTask from "@/components/pages/task/CreateTask";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useDeleteWork } from "@/data/work/useDeleteWork";
 import { useState } from "react";
 import { Task } from "@/data/types/task";
 import { WorkState } from "@/data/types/work";
-import RStack from "../common/RStack";
+import RStack from "@/components/common/RStack";
 
 const TaskItem = ({
   task,

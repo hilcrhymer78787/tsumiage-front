@@ -1,5 +1,5 @@
 import Layout from "@/layouts/default";
-import FriendDetailMain from "@/components/friend/detail/FriendDetailMain";
+import FriendDetailMain from "@/components/pages/friend/detail/FriendDetailMain";
 
 const FriendDetail = () => {
   return (

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
-import TaskItem from "@/components/task/TaskItem";
+import TaskItem from "@/components/pages/task/TaskItem";
 import { Task } from "@/data/types/task";
 
 const TaskList = ({

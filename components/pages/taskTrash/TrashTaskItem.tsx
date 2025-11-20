@@ -1,6 +1,6 @@
 import { IconButton, ListItem, ListItemText } from "@mui/material";
 import { Task } from "@/data/types/task";
-import RStack from "../common/RStack";
+import RStack from "@/components/common/RStack";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useDeleteTask } from "@/data/task/useDeleteTask";

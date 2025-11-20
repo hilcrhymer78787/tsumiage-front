@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import CreateUser from "@/components/user/CreateUser";
+import CreateUser from "@/components/pages/user/CreateUser";
 import { Card, Container } from "@mui/material";
 import Center from "./Center";
 const AuthNew = ({ setIsNew }: { setIsNew: Dispatch<SetStateAction<boolean>> }) => {

@@ -5,7 +5,7 @@ import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 import { useCreateInvitation } from "@/data/invitation/useCreateInvitation";
-import ErrTxt from "../common/ErrTxt";
+import ErrTxt from "@/components/common/ErrTxt";
 
 const CreateFriend = () => {
   const { createInvitation, isLoading, emailError, message, setMessage, error } =

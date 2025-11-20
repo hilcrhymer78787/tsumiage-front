@@ -1,5 +1,5 @@
 import Layout from "@/layouts/default";
-import TaskSortMain from "@/components/taskSort/TaskSortMain";
+import TaskSortMain from "@/components/pages/taskSort/TaskSortMain";
 
 const TaskSort = () => {
   return (
