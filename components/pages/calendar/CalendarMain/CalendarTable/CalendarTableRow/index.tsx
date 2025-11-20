@@ -1,8 +1,8 @@
 import { Box, Dialog, DialogTitle, SxProps, TableCell, TableRow } from "@mui/material";
-import { TASK_NAME_WIDTH } from "@/components/pages/calendar/CalendarTable";
+import { TASK_NAME_WIDTH } from "@/components/pages/calendar/CalendarMain/CalendarTable";
 
 import { Calendar } from "@/data/types/calendar";
-import CalendarTableCell from "@/components/pages/calendar/CalendarTableCell";
+import CalendarTableCell from "@/components/pages/calendar/CalendarMain/CalendarTable/CalendarTableRow/CalendarTableCell";
 import { useState } from "react";
 import { Task } from "@/data/types/task";
 

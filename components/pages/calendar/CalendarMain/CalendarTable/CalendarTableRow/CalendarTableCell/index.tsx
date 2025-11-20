@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { Calendar } from "@/data/types/calendar";
-import WorkStateIcon from "@/components/pages/calendar/WorkStateIcon";
+import WorkStateIcon from "@/components/pages/calendar/CalendarMain/CalendarTable/CalendarTableRow/CalendarTableCell/WorkStateIcon";
 import dayjs from "dayjs";
 import { useCreateWork } from "@/data/work/useCreateWork";
 
