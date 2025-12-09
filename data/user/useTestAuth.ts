@@ -19,7 +19,9 @@ export const useTestAuth = () => {
   const testAuth = async () => {
     setError("");
     setIsLoading(true);
-    await api.get("/sanctum/csrf-cookie");
+    if (process.env.NEXT_PUBLIC_API_BASE_URL !== "http://localhost:4000") {
+      await api.get("/sanctum/csrf-cookie");
+    }
     return api({
       url: "/api/user/auth/test",
       method: "GET",
