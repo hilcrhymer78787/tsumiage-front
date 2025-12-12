@@ -34,7 +34,7 @@ export const usePasswordForgot = () => {
     setEmailError("");
     setIsLoading(true);
     if (validation(data)) return;
-    if (process.env.NEXT_PUBLIC_API_BASE_URL !== "http://localhost:4000") {
+    if (process.env.NEXT_PUBLIC_BE === "laravel") {
       await api.get("/sanctum/csrf-cookie");
     }
     return api({

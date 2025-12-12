@@ -45,7 +45,7 @@ export const useBasicAuth = () => {
     if (validation(data)) return;
     setError("");
     setIsLoading(true);
-    if (process.env.NEXT_PUBLIC_API_BASE_URL !== "http://localhost:4000") {
+    if (process.env.NEXT_PUBLIC_BE === "laravel") {
       await api.get("/sanctum/csrf-cookie");
     }
     return api({
